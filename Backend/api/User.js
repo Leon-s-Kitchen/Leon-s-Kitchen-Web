@@ -67,6 +67,17 @@ router.post('/save-destination', async (req, res) => {
   });
   
 
+  router.get('/products', async (req, res) => {
+    try {
+      // Retrieve offers from the database
+      const offers = await Product.find();
+      res.json(offers);
+    } catch (error) {
+      console.error('Error fetching offers:', error);
+      res.status(500).json({ error: 'Failed to fetch offers' });
+    }
+  });
+
  // Delete item from the cart
 router.delete('/cart/:userId/:itemId', async (req, res) => {
     try {
