@@ -10,6 +10,7 @@ const UserVerification=require('./../models/UserVerification');
 const PasswordReset=require('./../models/PasswordReset');
 const Cart=require('./../models/Cart')
 const Destination = require('./../models/Destination');
+const Product=require('./../models/Product')
 
 //email handler
 const nodemailer=require("nodemailer");
@@ -69,7 +70,6 @@ router.post('/save-destination', async (req, res) => {
 
   router.get('/products', async (req, res) => {
     try {
-      // Retrieve offers from the database
       const offers = await Product.find();
       res.json(offers);
     } catch (error) {
