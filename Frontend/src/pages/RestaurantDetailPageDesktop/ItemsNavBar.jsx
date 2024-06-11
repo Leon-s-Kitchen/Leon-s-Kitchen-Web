@@ -1,9 +1,9 @@
 import React from 'react';
 import { IoMdClose } from "react-icons/io";
 import { Button, Img, Input, Line, List, Text } from "components";
-import './GalleryNavBar.css'
+import './ItemsNavBar.css'
 
-const GalleryNavBar = ({
+const ItemsNavBar = ({
   navigate,
   handleButtonClick,
   handleClosePopup,
@@ -20,15 +20,8 @@ const GalleryNavBar = ({
         src="images/img_32700620370740.png"
         alt="Logo"
       />
-      <div className="nav-buttons-container" style={{
-        marginTop:"50px",
-        display:"flex",
-        justifyContent:"space-between"
-      }}>
-        <div className="nav-buttons" style={{
-          display:"flex",
-          justifyContent:"space-between"
-        }}>
+      <div className="nav-buttons-container">
+        <div className="nav-buttons">
           <button className="nav-button">
             Home
           </button>
@@ -72,7 +65,7 @@ const GalleryNavBar = ({
         </div>
         {isPopupOpen && (
           <div className="popup-overlay">
-            <div className="popup-inner-gallery">
+            <div className="popup-inner">
               <button
                 onClick={handleClosePopup}
                 className="popup-inner-close-button"
@@ -110,7 +103,7 @@ const GalleryNavBar = ({
           </div>
         )}
       </div>
-      {/* <button
+      <button
         className="logout-button"
         onClick={() => {
           logoutUser(navigate);
@@ -125,9 +118,9 @@ const GalleryNavBar = ({
           />
           <span className="logout-text">Logout</span>
         </div>
-      </button> */}
+      </button>
     </div>
   );
 };
 
-export default GalleryNavBar;
+export default ItemsNavBar;

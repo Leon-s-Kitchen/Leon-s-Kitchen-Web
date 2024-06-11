@@ -1,9 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { Text, Img } from "components";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-const FriedRice = ({ handleButtonClick, handleAddToCart, notify, friedRiceRef }) => {
+const FriedRice = ({ handleButtonClick,  friedRiceRef,user }) => {
   const [offers, setOffers] = useState([]);
+  const handleAddToCart = async (itemName, itemDescription, itemPrice) => {
+    try {
+      // Prepare the item data
+      const itemData = {
+        name: itemName,
+        description: itemDescription,
+        price: itemPrice,
+        userId: user.email,
+        // Add other item details as needed
+      };
+
+      // Make a POST request to your backend endpoint
+      const response = await fetch("http://localhost:5000/user/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(itemData),
+      });
+    } catch (error) {
+      // Handle unexpected errors
+      console.error("An error occurred:", error);
+    }
+  };
+
+  const notify = () => toast("Added to the cart successfully!");
 
   useEffect(() => {
     const fetchOffers = async () => {
@@ -22,7 +50,7 @@ const FriedRice = ({ handleButtonClick, handleAddToCart, notify, friedRiceRef })
   return (
     <div className="flex flex-col items-center justify-start w-full">
       <Text className="mt-[65px] sm:text-[34px] md:text-[40px] text-[44px] text-orange-400" size="txtPoppinsBold44">
-        Fried Rice
+      Leon's Kitchen Delights
       </Text>
       <div ref={friedRiceRef} className="gap-5 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center max-w-[1528px] min-h-[auto] mt-[18px] mx-auto md:px-5 w-full">
         {offers.length > 0 ? (
@@ -31,7 +59,7 @@ const FriedRice = ({ handleButtonClick, handleAddToCart, notify, friedRiceRef })
               <div className="flex sm:flex-col flex-row gap-[30px] items-center justify-between mt-0.5 w-[98%] md:w-full">
                 <div className="flex flex-col items-start justify-start">
                   <Text className="text-black-900 text-xl" size="txtPoppinsSemiBold20">{offer.title}</Text>
-                  <Text className="mt-[18px] text-black-900 text-sm" size="txtPoppinsRegular14">{offer.desc}</Text>
+                  {/* <Text className="mt-[18px] text-black-900 text-sm" size="txtPoppinsRegular14">{offer.desc}</Text> */}
                   <Text className="mt-[69px] text-black-900_01 text-lg" size="txtPoppinsBold18">{`Rs. ${offer.price}`}</Text>
                 </div>
                 <div className="h-[199px] relative w-[47%] sm:w-full">
@@ -51,5 +79,8 @@ const FriedRice = ({ handleButtonClick, handleAddToCart, notify, friedRiceRef })
     </div>
   );
 };
+const mapStateToProps = ({ session }) => ({
+  user: session.user,
+});
 
-export default FriedRice;
+export default connect(mapStateToProps)(FriedRice);
