@@ -161,11 +161,11 @@ const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
             <div className="flex flex-col items-center justify-start w-full">
               <div className="border border-black-900_19 border-solid flex flex-col items-center justify-end p-[13px] rounded-bl-[12px] rounded-br-[12px] w-full">
                 <Img
-                  className="h-[38px] md:h-auto md:ml-[0] ml-[23px] mt-1 object-cover w-[2%]"
-                  src="images/img_.png"
+                  className="h-[58px] md:h-auto md:ml-[0]  mt-1 object-cover w-[4%] "
+                  src="images/party.gif"
                   alt="One"
                 />
-                {/* <Text className="mb-2">Welcome, {user.name}</Text> */}
+                <Text className="mb-2">Welcome, {user.name}</Text>
               </div>
               <NavBar
                 navigate={navigate}
@@ -215,6 +215,7 @@ const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
           </div>
         </div>
         {/* new end */}
+        <div className="sm:mt-10">
         <Helmet>
           <script
             src="https://static.elfsight.com/platform/platform.js"
@@ -222,10 +223,11 @@ const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
           />
         </Helmet>
         <div
-          className="elfsight-app-fd76f4b6-e0fc-4e44-98f9-82fc7d69a499"
+          className="elfsight-app-fd76f4b6-e0fc-4e44-98f9-82fc7d69a499 "
           data-elfsight-app-lazy
           style={{ paddingTop: "30px" }} // Adjust the padding as needed
         />
+        </div>
         
         <div className="flex flex-col items-center justify-start w-full sm:hidden">
           <div className="md:h-[546px] h-[704px] md:px-5 relative w-full">

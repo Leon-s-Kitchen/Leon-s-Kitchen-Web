@@ -48,7 +48,7 @@ const NavBar = ({
           </button>
           <button
             className="nav-button cart-button"
-            onClick={handleButtonClick}
+            onClick={()=> navigate("/orderingpage")}
           >
             <img
               src="images/cart.svg"
