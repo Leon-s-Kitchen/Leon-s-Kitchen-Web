@@ -12,7 +12,8 @@ import { connect } from "react-redux";
 import FriedRice from "./FriedRice";
 import ItemsNavBar from "./ItemsNavBar";
 import FooterComponent from "./FooterComponent";
-
+import NavBar from "./NavBar";
+import PopUpImage from "./../../assets/images/logo.png";
 
 const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
   const navigate = useNavigate();
@@ -26,9 +27,54 @@ const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
     "images/4.jpg",
     "images/5.jpg",
     "images/6.jpg",
+    "images/8.jpg",
+    "images/9.jpg",
+    "images/10.jpg",
+    "images/11.jpg",
+    "images/12.jpg",
+    "images/13.jpg",
+    "images/14.jpg",
+    "images/15.jpg",
+    "images/16.jpg",
+    "images/17.jpg",
+    "images/18.jpg",
+    "images/19.jpg",
+    "images/20.jpg",
+    "images/21.jpg",
+    "images/22.jpg",
+    "images/23.jpg",
+    "images/24.jpg",
+    "images/25.jpg",
+    "images/26.jpg",
+    "images/27.jpg",
+    "images/28.jpg",
+    "images/29.jpg",
+    "images/30.jpg",
+    "images/31.jpg",
+    "images/32.jpg",
+    "images/33.jpg",
+    "images/34.jpg",
+    "images/35.jpg",
+    "images/36.jpg",
+    "images/37.jpg",
+    "images/39.jpg",
+    "images/40.jpg",
+    "images/41.jpg",
+    "images/42.jpg",
+    "images/43.jpg",
+    "images/44.jpg",
+    "images/45.jpg",
+    "images/46.jpg",
+    "images/47.jpg",
   ];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  const [cartItemCount, setCartItemCount] = useState(0);
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -110,105 +156,83 @@ const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
   return (
     <>
       <div className="bg-white-A700 flex flex-col font-poppins items-center justify-start mx-auto w-full">
-        <div className="flex flex-col gap-5 items-center justify-start w-full">
-          <div className="md:h-[477px] h-[716px] max-w-[1534px] mx-auto md:px-5 relative w-full">
-            <div className="absolute md:h-[477px] h-[697px] inset-[0] justify-center m-auto w-full">
-              <div className="absolute bottom-[4%] h-[477px] inset-x-[0] mx-auto w-full">
-                <div className="absolute h-[477px] inset-[0] justify-center m-auto w-full">
-                  <div className="slideshow-container">
-                    {images.map((image, index) => (
-                      <Img
-                        key={index}
-                        className={`slideshow-image ${
-                          index === currentImageIndex ? "active" : ""
-                        }`}
-                        src={image}
-                        alt={`slide-${index}`}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="absolute flex flex-col h-max inset-y-[0] items-start justify-start left-[4%] my-auto">
-                    <Text
-                      className="text-white-A700 text-xl"
-                      size="txtPoppinsRegular20"
-                    >
-                      <>I&#39;m lovin&#39; it!</>
-                    </Text>
-                    <Text
-                      className="sm:text-[40px] md:text-[46px] text-[54px] text-white-A700"
-                      size="txtPoppinsSemiBold54"
-                    >
-                      LEON’S KITCHEN GALLE
-                    </Text>
-                  </div>
-                  <Text
-                    className="absolute bottom-[22%] left-[31%] text-lg text-white-A700"
-                    size="txtPoppinsSemiBold18"
-                  >
-                    Delivery in 20-25 Minutes
-                  </Text>
-                  <Text
-                    className="absolute bottom-[23%] left-[9%] text-lg text-white-A700"
-                    size="txtPoppinsSemiBold18"
-                  >
-                    Minimum Order: Rs.1000
-                  </Text>
-                  <div className="absolute border border-solid border-white-A700 bottom-[19%] flex flex-col items-start justify-end left-[4%] p-3 rounded-[31px] w-[22%]">
-                    <Img
-                      className="h-[34px] md:h-auto md:ml-[0] ml-[21px] mt-[5px] object-cover w-[34px]"
-                      src="images/img_ordercompleted.png"
-                      alt="ordercompleted"
-                    />
-                  </div>
-                  <div className="absolute border border-solid border-white-A700 bottom-[19%] flex flex-col items-start justify-end left-[26%] p-3.5 rounded-[31px] w-[23%]">
-                    <Img
-                      className="h-[34px] md:h-auto ml-2 md:ml-[0] object-cover w-[34px]"
-                      src="images/img_motocross.png"
-                      alt="motocross"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="absolute bg-orange-600 bottom-[0] flex flex-row gap-[13px] items-center justify-center left-[0] p-3.5 rounded-br-[12px] rounded-tr-[12px] w-[22%]">
+        <div className="sm:h-[818px] h-[820px] md:h-[914px] max-w-[1545px] mx-auto md:px-5 relative w-full">
+          <div className="absolute flex flex-col h-full inset-[0] items-center justify-center m-auto w-[99%]">
+            <div className="flex flex-col items-center justify-start w-full">
+              <div className="border border-black-900_19 border-solid flex flex-col items-center justify-end p-[13px] rounded-bl-[12px] rounded-br-[12px] w-full">
                 <Img
-                  className="h-[29px] md:h-auto ml-[47px] object-cover w-[29px]"
-                  src="images/img_clock_29x29.png"
-                  alt="clock"
+                  className="h-[38px] md:h-auto md:ml-[0] ml-[23px] mt-1 object-cover w-[2%]"
+                  src="images/img_.png"
+                  alt="One"
                 />
-                <Text
-                  className="mr-[39px] text-lg text-white-A700"
-                  size="txtPoppinsSemiBold18"
-                >
-                  Open until 10:00 PM
-                </Text>
+                {/* <Text className="mb-2">Welcome, {user.name}</Text> */}
               </div>
-             {/* End */}
-              <div className="absolute flex md:flex-col flex-row font-manrope md:gap-5 inset-x-[0] items-center justify-start mx-auto top-[0] w-[98%]">
-                
-                <div style={{
-                  marginTop:"50px"
-                }}>
-                <ItemsNavBar/>
-                </div>
-                
-              </div>
-              <Img
-                className="h-[58px] md:h-auto md:ml-[0] ml-[750px] mt-1 object-cover w-[4%] "
-                src="images/party.gif"
-                alt="One"
+              <NavBar
+                navigate={navigate}
+                handleButtonClick={handleButtonClick}
+                handleClosePopup={handleClosePopup}
+                isPopupOpen={isPopupOpen}
+                cartItemCount={cartItemCount}
+                logoutUser={logoutUser}
+                handleLogout={handleLogout}
+                PopUpImage={PopUpImage}
               />
-              <Text className="mb-2 ml-[700px]">Welcome,{user.name}</Text>
+
+              <div className="font-poppins h-[610px] md:h-[651px] mt-[41px] relative w-full">
+                <div className="slideshow-container">
+                  {images.map((image, index) => (
+                    <Img
+                      key={index}
+                      className={`slideshow-image ${
+                        index === currentImageIndex ? "active" : ""
+                      }`}
+                      src={image}
+                      alt={`slide-${index}`}
+                    />
+                  ))}
+                </div>
+
+                <div className="absolute bg-blue_gray-100_7f bottom-[5%] flex flex-col items-center justify-end left-[3%] p-[22px] sm:px-5 rounded-[20px] w-[44%]">
+                  <div className="flex flex-col gap-[7px] items-start justify-start mt-[25px]">
+                    <Text
+                      className="text-2xl md:text-[22px] text-black-900_01 sm:text-xl"
+                      size="txtPoppinsSemiBold24"
+                    >
+                      Order Restaurant food and takeaway.
+                    </Text>
+                    <Text
+                      className="leading-[66.00px] md:text-5xl text-[64px] text-black-900_01"
+                      size="txtPoppinsSemiBold64"
+                    >
+                      <>
+                        The Best of <br /> Galle
+                      </>
+                    </Text>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         {/* new end */}
-        <div className="flex flex-col items-center justify-start w-full">
+        <Helmet>
+          <script
+            src="https://static.elfsight.com/platform/platform.js"
+            defer
+          />
+        </Helmet>
+        <div
+          className="elfsight-app-fd76f4b6-e0fc-4e44-98f9-82fc7d69a499"
+          data-elfsight-app-lazy
+          style={{ paddingTop: "30px" }} // Adjust the padding as needed
+        />
+        
+        <div className="flex flex-col items-center justify-start w-full sm:hidden">
           <div className="md:h-[546px] h-[704px] md:px-5 relative w-full">
-            <div className="absolute h-[690px] inset-[0] justify-center m-auto w-full">
+            <div className="absolute h-[690px] inset-0 justify-center m-auto w-full hidden sm:block">
               <div className="flex flex-col items-center justify-start mb-[-69px] ml-[95px] w-[82%] z-[1]">
                 <div className="flex flex-col md:gap-10 gap-[77px] items-center justify-start w-full">
-                  <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-[93%] md:w-full">
+                  <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-[93%] sm:mr-10 md:w-full">
                     <Text
                       className="md:text-3xl sm:text-[28px] text-[32px] text-black-900"
                       size="txtPoppinsBold32"
@@ -218,8 +242,6 @@ const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
                   </div>
                   <div className="absolute bg-orange-600 h-24 inset-x-0 mx-auto top-[100px] w-full">
                     <div className="flex items-center justify-center h-full">
-                      {" "}
-                      {/* Center items vertically and horizontally */}
                       <div className="space-x-16 text-center">
                         <button
                           className="text-black font-bold text-lg bg-transparent px-4 py-2 rounded hover:bg-gray-300 hover:text-orange-600 focus:outline-none"
@@ -248,39 +270,31 @@ const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
 
             <div className="md:h-[546px] h-[595px] mt-auto mx-auto w-full">
               <Img
-                className="absolute bottom-[0] h-[546px] inset-x-[0] mx-auto object-cover w-[90%] top-[210px]"
+                className="absolute bottom-0 h-[546px] inset-x-0 mx-auto object-cover w-[90%] top-[210px]"
                 src="images/img_32823722953625.png"
                 alt="32823722953625"
               />
             </div>
           </div>
         </div>
-        <FriedRice/>
-        
-        
-        
-        
+        <div className="sm:mt-10">
+        <FriedRice />
+        </div>
+      
+
         <div className="h-[634px] md:h-[661px] max-w-[1548px] mt-[27px] mx-auto md:px-5 relative w-full">
           <Img
             className="h-[634px] m-auto object-cover w-full"
             src="images/img_image1.png"
             alt="imageOne"
           />
-          
         </div>
 
-        <Helmet>
-          <script
-            src="https://static.elfsight.com/platform/platform.js"
-            defer
-          />
-        </Helmet>
-        <div
-          className="elfsight-app-fd76f4b6-e0fc-4e44-98f9-82fc7d69a499"
-          data-elfsight-app-lazy
-          style={{ paddingTop: "30px" }} // Adjust the padding as needed
-        />
-        <FooterComponent/>
+        
+        
+        
+       
+        
       </div>
     </>
   );

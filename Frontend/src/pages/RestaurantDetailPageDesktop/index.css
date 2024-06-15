@@ -36,6 +36,12 @@
   transition: opacity 1s ease-in-out;
   object-fit: cover;
 }
+@media (max-width: 768px) {
+  .slideshow-image {
+    height: auto; 
+    
+  }
+}
 
 .slideshow-image.active {
   opacity: 1;

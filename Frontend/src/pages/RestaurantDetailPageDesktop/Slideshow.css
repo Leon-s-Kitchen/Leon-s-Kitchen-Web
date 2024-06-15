@@ -1,0 +1,112 @@
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .slideshow-image {
+    width: 100%;
+    height: auto;
+    display: none;
+  }
+  
+  .slideshow-image.active {
+    display: block;
+  }
+  
+  .slideshow-text-container {
+    position: absolute;
+    bottom: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+  }
+  
+  .slideshow-text-left {
+    position: absolute;
+    left: 4%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: left;
+  }
+  
+  .slideshow-title {
+    font-size: 54px;
+    color: #fff;
+  }
+  
+  .slideshow-delivery-time,
+  .slideshow-min-order {
+    position: absolute;
+    color: #fff;
+  }
+  
+  .slideshow-delivery-time {
+    bottom: 22%;
+    left: 31%;
+  }
+  
+  .slideshow-min-order {
+    bottom: 23%;
+    left: 9%;
+  }
+  
+  .slideshow-icon {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    border: 1px solid #fff;
+    border-radius: 31px;
+  }
+  
+  .order-completed {
+    bottom: 19%;
+    left: 4%;
+    padding: 0.75rem;
+    width: 22%;
+  }
+  
+  .motocross {
+    bottom: 19%;
+    left: 26%;
+    padding: 0.875rem;
+    width: 23%;
+  }
+  
+  .slideshow-icon-image {
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+    width: 34px;
+    height: 34px;
+    object-cover: cover;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .slideshow-title {
+      font-size: 24px;
+    }
+  
+    .slideshow-delivery-time,
+    .slideshow-min-order {
+      font-size: 14px;
+    }
+  
+    .slideshow-icon {
+      width: 40%;
+      padding: 0.5rem;
+    }
+  
+    .order-completed {
+      left: 4%;
+      bottom: 19%;
+    }
+  
+    .motocross {
+      left: 48%;
+      bottom: 19%;
+    }
+  }
+  
