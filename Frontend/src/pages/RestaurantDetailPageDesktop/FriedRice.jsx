@@ -3,6 +3,7 @@ import { Text, Img } from "components";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const FriedRice = ({ handleButtonClick,  friedRiceRef,user }) => {
   const [offers, setOffers] = useState([]);
@@ -73,7 +74,18 @@ const FriedRice = ({ handleButtonClick,  friedRiceRef,user }) => {
             </div>
           ))
         ) : (
-          <Text className="text-black-900 text-xl">Loading...</Text>
+          <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            
+          }}
+        >
+          <p className="text-black-900 text-xl">Loading... <CircularProgress /></p>
+        </div>
+          
+      
         )}
       </div>
     </div>

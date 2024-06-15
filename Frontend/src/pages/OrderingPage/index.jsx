@@ -248,11 +248,11 @@ const OrderingPagePage = ({ logoutUser, user }) => {
             <div className="absolute sm:h-[2131px] md:h-[2145px] h-[2271px] inset-[0] justify-center m-auto w-full">
               <div className="absolute flex flex-col font-manrope inset-x-[0] justify-start mx-auto top-[0] w-full">
                 <div className="border border-black-900_19 border-solid flex flex-col items-center justify-end p-[13px] rounded-bl-[12px] top=[10px] rounded-br-[12px] w-full">
-                  <Img
-                    className="h-[38px] md:h-auto md:ml-[0] ml-[23px] mt-1 object-cover w-[2%]"
-                    src="images/img_.png"
-                    alt="One"
-                  />
+                <Img
+                className="h-[58px] md:h-auto md:ml-[0]  mt-1 object-cover w-[4%] "
+                src="images/happy.gif"
+                alt="One"
+              />
                   <Text className="mb-2">Welcome, {user.name}</Text>
                 </div>
                 <div className="flex md:flex-col flex-row gap-[53px] items-center justify-end md:ml-[0] ml-[383px] mt-[38px] w-3/4 md:w-full">

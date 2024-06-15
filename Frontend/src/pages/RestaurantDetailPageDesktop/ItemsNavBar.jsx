@@ -1,65 +1,77 @@
 import React from 'react';
-import { IoMdClose } from "react-icons/io";
-import { Button, Img, Input, Line, List, Text } from "components";
-import './ItemsNavBar.css'
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { IoMdClose } from 'react-icons/io';
+import { logoutUser } from './../../auth/actions/userActions';
+import { Img } from 'components';
+import './ItemsNavBar.css';
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 const ItemsNavBar = ({
-  navigate,
   handleButtonClick,
   handleClosePopup,
   isPopupOpen,
   cartItemCount,
-  logoutUser,
-  handleLogout,
-  PopUpImage
+  PopUpImage,
+  user
 }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    
+    try {
+      // Make a request to your backend endpoint to clear the user's cart
+      const response = await fetch("http://localhost:5000/user/cart/clear", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: user.email }),
+      });
+
+      if (response.ok) {
+        // Handle success, e.g., show a success message
+        console.log("User's cart cleared successfully");
+      } else {
+        // Handle failure, e.g., show an error message
+        console.error("Failed to clear user's cart");
+      }
+    } catch (error) {
+      // Handle unexpected errors
+      console.error("An error occurred during cart clearing:", error);
+    }
+
+    dispatch(logoutUser());
+    navigate('/login');
+  };
+
   return (
     <div className="nav-container">
-      <Img
-        className="logo"
-        src="images/img_32700620370740.png"
-        alt="Logo"
-      />
+      <Img className="logo" src="images/img_32700620370740.png" alt="Logo" />
       <div className="nav-buttons-container">
         <div className="nav-buttons">
-          <button className="nav-button">
+          <button className="nav-button" onClick={() => navigate('/')}>
             Home
           </button>
-          <button
-            className="nav-button"
-            onClick={() => navigate("/loginorreg")}
-          >
+          <button className="nav-button" onClick={() => navigate('/loginorreg')}>
             Browse Menu
           </button>
-          <button className="nav-button">
+          <button className="nav-button" onClick={() => navigate('/special-offers')}>
             Special Offers
           </button>
-          <button
-            className="nav-button"
-            onClick={() => navigate("/gallery")}
-          >
+          <button className="nav-button" onClick={() => navigate('/gallery')}>
             Restaurants
           </button>
-          <button
-            className="nav-button"
-            onClick={handleButtonClick}
-          >
+          <button className="nav-button" onClick={handleButtonClick}>
             Track Order
           </button>
-          <button
-            className="nav-button cart-button"
-            onClick={handleButtonClick}
-          >
-            <img
-              src="images/cart.svg"
-              alt="Cart"
-              className="cart-icon"
-            />
+          <button className="nav-button cart-button" onClick={handleButtonClick}>
+            <img src="images/cart.svg" alt="Cart" className="cart-icon" />
             <span>Cart</span>
             {cartItemCount > 0 && (
-              <span className="cart-count">
-                {cartItemCount}
-              </span>
+              <span className="cart-count">{cartItemCount}</span>
             )}
           </button>
         </div>
@@ -72,29 +84,22 @@ const ItemsNavBar = ({
               >
                 <IoMdClose className="close-icon" />
               </button>
-              <h2 className="popup-title">
-                Please SignUp or Login
-              </h2>
+              <h2 className="popup-title">Please SignUp or Login</h2>
               <p className="popup-text">
-                Dear Customer, You need to login or signup to use
-                this feature.
+                Dear Customer, You need to login or signup to use this feature.
               </p>
-              <img
-                src={PopUpImage}
-                alt="Popup"
-                className="popup-image"
-              />
+              <img src={PopUpImage} alt="Popup" className="popup-image" />
               <div className="button-container">
                 <button
                   className="signup-button"
-                  onClick={() => navigate("/loginorreg")}
+                  onClick={() => navigate('/loginorreg')}
                 >
                   Sign Up
                 </button>
                 <div className="or-text">or</div>
                 <button
                   className="login-button"
-                  onClick={() => navigate("/loginorreg")}
+                  onClick={() => navigate('/loginorreg')}
                 >
                   Login
                 </button>
@@ -103,19 +108,9 @@ const ItemsNavBar = ({
           </div>
         )}
       </div>
-      <button
-        className="logout-button"
-        onClick={() => {
-          logoutUser(navigate);
-          handleLogout();
-        }}
-      >
+      <button className="logout-button" onClick={handleLogout}>
         <div className="logout-content">
-          <img
-            className="user-icon"
-            src="images/img_maleuser.png"
-            alt="User"
-          />
+          <img className="user-icon" src="images/img_maleuser.png" alt="User" />
           <span className="logout-text">Logout</span>
         </div>
       </button>
@@ -123,4 +118,8 @@ const ItemsNavBar = ({
   );
 };
 
-export default ItemsNavBar;
+const mapStateToProps = ({ session }) => ({
+  user: session.user,
+});
+
+export default connect(mapStateToProps, { logoutUser })(ItemsNavBar);

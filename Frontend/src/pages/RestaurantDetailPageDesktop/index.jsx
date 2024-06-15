@@ -11,6 +11,8 @@ import { Button, Img, Input, Line, List, Text } from "components";
 import { connect } from "react-redux";
 import FriedRice from "./FriedRice";
 import ItemsNavBar from "./ItemsNavBar";
+import FooterComponent from "./FooterComponent";
+
 
 const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
   const navigate = useNavigate();
@@ -192,11 +194,11 @@ const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
                 
               </div>
               <Img
-                className="h-[38px] md:h-auto md:ml-[0] ml-[750px] mt-1 object-cover w-[2%]"
-                src="images/img_.png"
+                className="h-[58px] md:h-auto md:ml-[0] ml-[750px] mt-1 object-cover w-[4%] "
+                src="images/party.gif"
                 alt="One"
               />
-              <Text className="mb-2 ml-[700px]">Welcome, {user.name}</Text>
+              <Text className="mb-2 ml-[700px]">Welcome,{user.name}</Text>
             </div>
           </div>
         </div>
@@ -278,6 +280,7 @@ const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
           data-elfsight-app-lazy
           style={{ paddingTop: "30px" }} // Adjust the padding as needed
         />
+        <FooterComponent/>
       </div>
     </>
   );
