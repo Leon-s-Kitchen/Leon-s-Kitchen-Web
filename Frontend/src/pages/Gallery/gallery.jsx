@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import GalleryNavBar from "./GalleryNavBar";
 
 import PopUpImage from "./../../assets/images/logo.png";
+import NavBar from "./NavBar";
 
 const Gallery = ({ logoutUser, user }) => {
   const navigate = useNavigate();
@@ -127,7 +128,7 @@ const Gallery = ({ logoutUser, user }) => {
         />
         {/* <Text className="mb-2 ml-[0px]">Welcome!</Text> */}
 
-        <GalleryNavBar
+        <NavBar
           navigate={navigate}
           handleButtonClick={handleButtonClick}
           handleClosePopup={handleClosePopup}
@@ -161,13 +162,13 @@ const Gallery = ({ logoutUser, user }) => {
                     className="text-white-A700 text-xl"
                     size="txtPoppinsRegular20"
                   >
-                    <>I&#39;m lovin&#39; it!</>
+                    <>I&#39;m lovin&#39; it! 🍔</>
                   </Text>
                   <Text
                     className="sm:text-[40px] md:text-[46px] text-[54px] text-white-A700"
                     size="txtPoppinsSemiBold54"
                   >
-                    LEON’S KITCHEN GALLE
+                    LEON’S KITCHEN GALLE 
                   </Text>
                 </div>
                 

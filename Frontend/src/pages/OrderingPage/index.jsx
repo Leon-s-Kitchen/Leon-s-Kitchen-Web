@@ -12,7 +12,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import ReactWhatsapp from "react-whatsapp";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { BsEmojiSmile } from "react-icons/bs";
-import PopUpImage from "./../../assets/images/logo.png"
+import PopUpImage from "./../../assets/images/logo.png";
 
 const OrderingPagePage = ({ logoutUser, user }) => {
   const navigate = useNavigate();
@@ -248,11 +248,11 @@ const OrderingPagePage = ({ logoutUser, user }) => {
             <div className="absolute sm:h-[2131px] md:h-[2145px] h-[2271px] inset-[0] justify-center m-auto w-full">
               <div className="absolute flex flex-col font-manrope inset-x-[0] justify-start mx-auto top-[0] w-full">
                 <div className="border border-black-900_19 border-solid flex flex-col items-center justify-end p-[13px] rounded-bl-[12px] top=[10px] rounded-br-[12px] w-full">
-                <Img
-                className="h-[58px] md:h-auto md:ml-[0]  mt-1 object-cover w-[4%] "
-                src="images/happy.gif"
-                alt="One"
-              />
+                  <Img
+                    className="h-[58px] md:h-auto md:ml-[0]  mt-1 object-cover w-[4%] "
+                    src="images/happy.gif"
+                    alt="One"
+                  />
                   <Text className="mb-2">Welcome, {user.name}</Text>
                 </div>
                 <div className="flex md:flex-col flex-row gap-[53px] items-center justify-end md:ml-[0] ml-[383px] mt-[38px] w-3/4 md:w-full">
@@ -264,7 +264,8 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                       >
                         Home
                       </button>
-                      <button className="text-black-900_01 font-poppins font-medium text-lg hover-effect focus:outline-none nav-button"
+                      <button
+                        className="text-black-900_01 font-poppins font-medium text-lg hover-effect focus:outline-none nav-button"
                         onClick={() => navigate("/restaurantdetailpagedesktop")}
                       >
                         Browse Menu
@@ -624,6 +625,14 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                             <span className="ml-[26px] text-white-A700 text-xl">
                               Select Your Location
                             </span>
+                            <Img
+                              className="h-[58px] md:h-auto md:ml-[0]  mt-1 object-cover w-[15%] "
+                              src="images/pin.gif"
+                              alt="One"
+                              style={{
+                                border:"10px"
+                              }}
+                            />
                           </Button>
                           <button
                             className="bg-orange-600_cc border border-black-1900_1c border-solid flex flex-row items-center justify-between p-4 rounded-lg cursor-pointer"
@@ -642,7 +651,6 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                                     fontWeight: "600",
                                     textAlign: "center",
                                     fontSize: "40px",
-                                    
                                   }}
                                 >
                                   Order Information
@@ -651,7 +659,6 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                                   style={{
                                     textAlign: "center",
                                     fontSize: "20px",
-                                    
                                   }}
                                 >
                                   Your order is almost set!
@@ -660,7 +667,7 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                                       display: "inline-flex",
                                       alignItems: "center",
                                       marginLeft: "10px",
-                                      marginTop:""
+                                      marginTop: "",
                                     }}
                                   >
                                     <BsEmojiSmile />
@@ -703,18 +710,22 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                                     </span>
                                   </ReactWhatsapp>
                                 </div>
-                                <img src={PopUpImage} alt="Popup" style={{
-                                  width:"180px",
-                                  height:"180px",
-                                  marginLeft:"170px"
-                                }}/>
+                                <img
+                                  src={PopUpImage}
+                                  alt="Popup"
+                                  style={{
+                                    width: "180px",
+                                    height: "180px",
+                                    marginLeft: "170px",
+                                  }}
+                                />
                                 <div className="button-wrapper">
-                                <button
-                                  onClick={handleClosePopup}
-                                  className="popup-inner-button"
-                                >
-                                  Close
-                                </button>
+                                  <button
+                                    onClick={handleClosePopup}
+                                    className="popup-inner-button"
+                                  >
+                                    Close
+                                  </button>
                                 </div>
                               </div>
                             </div>

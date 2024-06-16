@@ -10,6 +10,7 @@ const UserVerification=require('./../models/UserVerification');
 const PasswordReset=require('./../models/PasswordReset');
 const Cart=require('./../models/Cart')
 const Destination = require('./../models/Destination');
+const Order=require('./../models/Order')
 const Product=require('./../models/Product')
 
 //email handler
@@ -47,6 +48,18 @@ const bcrypt = require('bcryptjs');
 const path=require("path");
 const { error } = require('console');
 const { errorMonitor } = require('events');
+
+router.post('/save-order', async (req, res) => {
+    try {
+      const order = new Order(req.body);
+      await order.save();
+      res.status(200).json({ message: 'Order saved successfully' });
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to save order', error });
+    }
+  });
+
+
 router.post('/save-destination', async (req, res) => {
     try {
       const { email, destination } = req.body;

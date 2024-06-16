@@ -23,7 +23,8 @@ const NavBar = ({
       <div className="nav-buttons-container">
         <div className="nav-buttons">
           <button className="nav-button"
-          onClick={()=> navigate("/")}>
+            onClick={()=> navigate("/")}
+          >
             Home
           </button>
           <button
