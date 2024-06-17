@@ -1,9 +1,16 @@
-// Assuming you are using Mongoose
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
   user: {
     type: String, // Assuming user's email is a string
+    required: true
+  },
+  name: {
+    type: String, // User's name
+    required: true
+  },
+  mobileNo: {
+    type: String, // User's mobile number
     required: true
   },
   items: [{

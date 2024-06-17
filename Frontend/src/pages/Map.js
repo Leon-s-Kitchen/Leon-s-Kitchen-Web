@@ -42,6 +42,8 @@ function Map({ user }) {
   const originRef = useRef(predefinedOrigin); // Set the initial value for originRef
   const destinationRef = useRef();
   const userEmail = user.email; // Replace with user's email
+  const userName=user.name;
+  const userNo=user.mobileNumber;
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [itemQuantities, setItemQuantities] = useState({});
   const [items, setItems] = useState([]);
@@ -109,6 +111,8 @@ function Map({ user }) {
     // Prepare order details
     const orderDetails = {
       user: userEmail,
+      name:userName,
+      mobileNo:userNo,
       items: items.map((menuItem) => ({
         name: menuItem.name,
         price: parseFloat(menuItem.price.replace("Rs. ", "")),
