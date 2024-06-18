@@ -89,7 +89,7 @@ const OrderingPagePage = ({ logoutUser, user }) => {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to create checkout session");
+        throw new Error("Failed to create checkout session 🤖");
       }
 
       const { url } = await response.json();
