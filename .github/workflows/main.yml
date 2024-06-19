@@ -13,6 +13,7 @@ jobs:
       FRONTEND_IMAGE: amayuru/leonsapp-frontend
       BACKEND_IMAGE: amayuru/leonsapp-backend
       GIT_REPO: https://github.com/Leon-s-Kitchen/Leon-s-Kitchen-Web.git
+      DOCKER_TAG: 5  
 
     steps:
     - name: Checkout code
@@ -28,16 +29,16 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Frontend Docker image
-      run: docker build -t $FRONTEND_IMAGE:${{ github.5 }} ./Frontend
+      run: docker build -t $FRONTEND_IMAGE:$DOCKER_TAG ./Frontend
 
     - name: Build Backend Docker image
-      run: docker build -t $BACKEND_IMAGE:${{ github.5 }} ./Backend
+      run: docker build -t $BACKEND_IMAGE:$DOCKER_TAG ./Backend
 
     - name: Push Frontend Docker image
-      run: docker push $FRONTEND_IMAGE:${{ github.5 }}
+      run: docker push $FRONTEND_IMAGE:$DOCKER_TAG
 
     - name: Push Backend Docker image
-      run: docker push $BACKEND_IMAGE:${{ github.5 }}
+      run: docker push $BACKEND_IMAGE:$DOCKER_TAG
 
     - name: Log out from Docker Hub
       run: docker logout
