@@ -11,12 +11,11 @@ const UserRouter = require('./api/User');
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Configure CORS to allow specific headers and methods
 const corsOptions = {
     origin: '*', 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'], 
-    optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+    optionsSuccessStatus: 200 
 };
 
 app.use(cors(corsOptions)); 
