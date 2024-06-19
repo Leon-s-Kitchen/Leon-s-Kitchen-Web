@@ -12,10 +12,10 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const corsOptions = {
-    origin: '*', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'], 
-    optionsSuccessStatus: 200 
+  origin: '*', // Allow all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
+  allowedHeaders: '*', // Allow all headers
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 };
 
 app.use(cors(corsOptions)); 
