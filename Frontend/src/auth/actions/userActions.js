@@ -1,6 +1,7 @@
 import axios from "axios";
 import { sessionService } from "redux-react-session";
 import { useNavigate } from 'react-router-dom';
+
 export const signupSuccess = () => {
   return {
     type: "SIGNUP_SUCCESS",
@@ -17,7 +18,7 @@ export const loginUser = (
     console.log("aaaaa");
     axios
       .post(
-        "http://localhost:5000/user/signin",
+        `${process.env.REACT_APP_BASE_URL}/user/signin`,
         credentials,
         {
           headers: {
@@ -73,7 +74,7 @@ export const signupUser = (
     
     axios
       .post(
-        "http://localhost:5000/user/signup",
+        `${process.env.REACT_APP_BASE_URL}/user/signup`,
         credentials,
         {
           headers: {
@@ -138,7 +139,7 @@ export const forgottenPassword = (
     console.log("aaaaa");
     axios
       .post(
-        "http://localhost:5000/user/requestPasswordReset",
+        `${process.env.REACT_APP_BASE_URL}/user/requestPasswordReset`,
         credentials,
         {
           headers: {
@@ -182,7 +183,7 @@ export const resetPassword = (
     console.log("aaaaa");
     axios
       .post(
-        "http://localhost:5000/user/resetPassword",
+        `${process.env.REACT_APP_BASE_URL}/user/resetPassword`,
         credentials,
         {
           headers: {

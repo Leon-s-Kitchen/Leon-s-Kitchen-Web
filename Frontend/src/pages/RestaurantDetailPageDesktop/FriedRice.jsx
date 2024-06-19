@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import CircularProgress from '@mui/material/CircularProgress';
 
+
+
 const FriedRice = ({ handleButtonClick,  friedRiceRef,user }) => {
   const [offers, setOffers] = useState([]);
   const handleAddToCart = async (itemName, itemDescription, itemPrice) => {
@@ -19,7 +21,7 @@ const FriedRice = ({ handleButtonClick,  friedRiceRef,user }) => {
       };
 
       // Make a POST request to your backend endpoint
-      const response = await fetch("http://localhost:5000/user/cart/add", {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/user/cart/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +39,7 @@ const FriedRice = ({ handleButtonClick,  friedRiceRef,user }) => {
   useEffect(() => {
     const fetchOffers = async () => {
       try {
-        const response = await fetch('http://localhost:5000/user/products');
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/user/products`);
         const data = await response.json();  // Correctly parse the JSON response
         setOffers(data);  // Set the parsed data to offers state
       } catch (error) {

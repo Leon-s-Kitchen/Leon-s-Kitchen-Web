@@ -14,6 +14,8 @@ import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { BsEmojiSmile } from "react-icons/bs";
 import PopUpImage from "./../../assets/images/logo.png";
 
+
+
 const OrderingPagePage = ({ logoutUser, user }) => {
   const navigate = useNavigate();
   const [itemQuantities, setItemQuantities] = useState({});
@@ -129,7 +131,7 @@ const OrderingPagePage = ({ logoutUser, user }) => {
   const deleteItem = async (menuItem) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/user/cart/${user.email}/${menuItem._id}`,
+        `${process.env.REACT_APP_BASE_URL}/user/cart/${user.email}/${menuItem._id}`,
         {
           method: "DELETE",
         }
@@ -192,7 +194,7 @@ const OrderingPagePage = ({ logoutUser, user }) => {
   const handleLogout = async () => {
     try {
       // Make a request to your backend endpoint to clear the user's cart
-      const response = await fetch("http://localhost:5000/user/cart/clear", {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/user/cart/clear`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -221,7 +223,7 @@ const OrderingPagePage = ({ logoutUser, user }) => {
     const fetchCartData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/user/cart/${user.email}`
+          `${process.env.REACT_APP_BASE_URL}/user/cart/${user.email}`
         );
         console.log(response); // Add this line to log the response
         if (!response.ok) {

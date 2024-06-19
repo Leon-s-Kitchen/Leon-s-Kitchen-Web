@@ -61,7 +61,7 @@ function Map({ user }) {
     const fetchCartData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/user/cart/${user.email}`
+          `${process.env.REACT_APP_BASE_URL}/user/cart/${user.email}`
         );
         console.log(response); // Add this line to log the response
         if (!response.ok) {
@@ -125,7 +125,7 @@ function Map({ user }) {
   
     // Save order to the backend
     try {
-      const response = await axios.post("http://localhost:5000/user/save-order", orderDetails);
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/save-order`, orderDetails);
       if (response.status === 200) {
         alert("Order saved successfully!");
       } else {
@@ -143,7 +143,7 @@ function Map({ user }) {
     try {
       const destination = destinationRef.current.value;
       // Send a POST request to your backend endpoint /save-destination
-      await axios.post("http://localhost:5000/user/save-destination", {
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/user/save-destination`, {
         email: userEmail,
         destination,
       });

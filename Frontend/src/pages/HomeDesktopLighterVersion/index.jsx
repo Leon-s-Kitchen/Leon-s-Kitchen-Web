@@ -93,7 +93,7 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
   const handleLogout = async () => {
     try {
       // Make a request to your backend endpoint to clear the user's cart
-      const response = await fetch("http://localhost:5000/user/cart/clear", {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/user/cart/clear`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

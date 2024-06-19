@@ -15,6 +15,8 @@ import FooterComponent from "./FooterComponent";
 import NavBar from "./NavBar";
 import PopUpImage from "./../../assets/images/logo.png";
 
+
+
 const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
   const navigate = useNavigate();
   const drinksRef = useRef(null);
@@ -85,7 +87,7 @@ const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
   const handleLogout = async () => {
     try {
       // Make a request to your backend endpoint to clear the user's cart
-      const response = await fetch("http://localhost:5000/user/cart/clear", {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/user/cart/clear`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -138,7 +140,7 @@ const RestaurantDetailPageDesktopPage = ({ logoutUser, user }) => {
       };
 
       // Make a POST request to your backend endpoint
-      const response = await fetch("http://localhost:5000/user/cart/add", {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/user/cart/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

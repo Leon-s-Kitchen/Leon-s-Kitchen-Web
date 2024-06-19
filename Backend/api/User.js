@@ -12,6 +12,7 @@ const Cart=require('./../models/Cart')
 const Destination = require('./../models/Destination');
 const Order=require('./../models/Order')
 const Product=require('./../models/Product')
+require('dotenv').config();
 
 //email handler
 const nodemailer=require("nodemailer");
@@ -260,7 +261,7 @@ router.post('/signup',(req,res)=>{
 //send verification email
 const sendVerificationEmail =({_id,email},res)=>{
     //url to be used in the email
-    const currentUrl="http://localhost:5000/";
+    const currentUrl = process.env.REACT_APP_BASE_URL;
 
     const uniqueString=uuidv4() + _id;
 

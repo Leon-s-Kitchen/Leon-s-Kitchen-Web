@@ -2,6 +2,8 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useState } from 'react';
 
+
+
 const CARD_OPTIONS = {
     iconStyle: "solid",
     style: {
@@ -37,7 +39,7 @@ export default function PaymentForm() {
         if (!error) {
             try {
                 const { id } = paymentMethod;
-                const response = await axios.post("http://localhost:5000/payment", {
+                const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/payment`, {
                     amount: 1000,
                     id
                 });
