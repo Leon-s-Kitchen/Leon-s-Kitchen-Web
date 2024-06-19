@@ -28,17 +28,16 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Frontend Docker image
-      run: docker build -t $FRONTEND_IMAGE:${{ github.run_number }} ./Frontend
+      run: docker build -t $FRONTEND_IMAGE:${{ github.5 }} ./Frontend
 
     - name: Build Backend Docker image
-      run: docker build -t $BACKEND_IMAGE:${{ github.run_number }} ./Backend
+      run: docker build -t $BACKEND_IMAGE:${{ github.5 }} ./Backend
 
     - name: Push Frontend Docker image
-      run: docker push $FRONTEND_IMAGE:${{ github.run_number }}
+      run: docker push $FRONTEND_IMAGE:${{ github.5 }}
 
     - name: Push Backend Docker image
-      run: docker push $BACKEND_IMAGE:${{ github.run_number }}
+      run: docker push $BACKEND_IMAGE:${{ github.5 }}
 
     - name: Log out from Docker Hub
       run: docker logout
-
