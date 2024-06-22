@@ -13,7 +13,7 @@ import ReactWhatsapp from "react-whatsapp";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { BsEmojiSmile } from "react-icons/bs";
 import PopUpImage from "./../../assets/images/logo.png";
-
+import axios from 'axios';
 
 
 const OrderingPagePage = ({ logoutUser, user }) => {
@@ -24,6 +24,56 @@ const OrderingPagePage = ({ logoutUser, user }) => {
   const [loading, setLoading] = useState(false);
   const [wmessage, setWMessage] = useState("");
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const handlePayment = async () => {
+
+
+    // Replace with actual values
+    const orderDetails = {
+        order_id: 'ItemNo12345',
+        amount: '1000.00',
+        currency: 'LKR',
+        return_url: 'https://www.google.com/',
+        cancel_url: 'https://www.google.com/'
+    };
+
+    try {
+        // Fetch hash and merchant_id from your backend
+        const response = await axios.post('http://localhost:5000/user/create-checkout-session', orderDetails);
+        const { merchant_id, hash } = response.data;
+
+        const payment = {
+            sandbox: true,
+            merchant_id: merchant_id,
+            return_url: orderDetails.return_url,
+            cancel_url: orderDetails.cancel_url,
+            notify_url: "https://www.google.com/notify",
+            order_id: orderDetails.order_id,
+            items: "Door bell wireless",
+            amount: orderDetails.amount,
+            currency: orderDetails.currency,
+            hash: hash,
+            first_name: "Saman",
+            last_name: "Perera",
+            email: "samanp@gmail.com",
+            phone: "0771234567",
+            address: "No.1, Galle Road",
+            city: "Colombo",
+            country: "Sri Lanka"
+        };
+
+        // Ensure payhere object is available
+        if (window.payhere) {
+            window.payhere.startPayment(payment);
+        } else {
+            console.error('PayHere SDK not loaded.');
+        }
+    } catch (error) {
+        console.error('Error creating checkout session:', error);
+    } finally {
+        setLoading(false);
+    }
+};
 
   const handleShowPopup = () => {
     setIsPopupVisible(true);
@@ -583,10 +633,11 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                         </div>
                         <Line className="bg-black-900_33 h-px w-full" />
 
-                        <form onSubmit={handleSubmit}>
+                        
                           <button
                             className="bg-orange-600_cc border border-black-900_1c border-solid flex flex-row items-center justify-between p-4 rounded-lg cursor-pointer w-100"
                             type="submit"
+                            onClick={handlePayment}
                             disabled={loading}
                             style={{
                               width: "400px",
@@ -617,7 +668,7 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                               }, 0) + 200}
                             </span>
                           </button>
-                        </form>
+                       
                         <div className="flex flex-col items-center justify-start mt-0.5 mb-3 w-full">
                           {/* Button to select location */}
                           <Button

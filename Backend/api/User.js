@@ -2,6 +2,10 @@ const express =require('express');
 const router=express.Router();
 const app=require('express')();
 app.use(express.static('public'));
+const bodyParser = require('body-parser');
+const crypto = require('crypto');
+
+
 //mongodb user model
 const User=require('./../models/User');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -13,6 +17,18 @@ const Destination = require('./../models/Destination');
 const Order=require('./../models/Order')
 const Product=require('./../models/Product')
 require('dotenv').config();
+
+
+router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.json());
+
+
+// Replace these values with your actual Merchant ID and Secret
+const MERCHANT_ID = '1227365';
+const MERCHANT_SECRET = 'NzYwNjQ0ODQ1MTU4Mjg2Mjc3MjI1NzU0MjcyODMyNDg2Nzc5NDQ3';
+
+// Route to handle the creation of the checkout session
+
 
 //email handler
 const nodemailer=require("nodemailer");
@@ -49,6 +65,45 @@ const bcrypt = require('bcryptjs');
 const path=require("path");
 const { error } = require('console');
 const { errorMonitor } = require('events');
+
+
+router.post('/create-checkout-session', (req, res) => {
+    const { order_id, amount, currency, return_url, cancel_url } = req.body;
+
+    // Generate the hash value
+    const hash = crypto.createHash('md5').update(MERCHANT_SECRET).digest('hex').toUpperCase();
+    const combinedHashString = MERCHANT_ID + order_id + amount + currency + hash;
+    const finalHash = crypto.createHash('md5').update(combinedHashString).digest('hex').toUpperCase();
+
+    // Send the hash and other necessary data to the frontend
+    res.json({
+        merchant_id: MERCHANT_ID,
+        hash: finalHash
+    });
+});
+
+// Route to handle PayHere notifications
+router.post('/user/notify', (req, res) => {
+    const { merchant_id, order_id, payhere_amount, payhere_currency, status_code, md5sig } = req.body;
+
+    // Generate the local md5sig
+    const localHash = crypto.createHash('md5').update(MERCHANT_SECRET).digest('hex').toUpperCase();
+    const combinedHashString = merchant_id + order_id + payhere_amount + payhere_currency + status_code + localHash;
+    const local_md5sig = crypto.createHash('md5').update(combinedHashString).digest('hex').toUpperCase();
+
+    // Verify the md5sig
+    if (local_md5sig === md5sig && status_code == 2) {
+        // Payment is successful, update your database accordingly
+        console.log(`Payment success for Order ID: ${order_id}`);
+        // TODO: Update your database with payment success
+    } else {
+        console.log(`Payment failed or invalid notification for Order ID: ${order_id}`);
+    }
+
+    res.sendStatus(200);
+});
+
+
 
 router.post('/save-order', async (req, res) => {
     try {

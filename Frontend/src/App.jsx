@@ -42,11 +42,12 @@ import EmailSent from "pages/EmailSent";
 import PasswordReset from "pages/PasswordReset";
 import RestaurantDetailPageDesktopPage from "pages/RestaurantDetailPageDesktop";
 import OrderingPagePage from "pages/OrderingPage";
-import HomeDesktopLighterVersion from "pages/HomeDesktopLighterVersion"
+import HomeDesktopLighterVersion from "pages/HomeDesktopLighterVersion";
 import MacBookPro14OnePage from "pages/MacBookPro14One";
-import PaymentForm from "pages/PaymentForm/PaymentForm";
+
 import Map from "pages/Map";
 import Gallery from "pages/Gallery/gallery";
+import PaymentModal from "pages/PaymentModal";
 function App({ checked }) {
   return (
     <BrowserRouter>
@@ -55,36 +56,32 @@ function App({ checked }) {
           <Routes>
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/gallery" element={<Gallery/>}/>
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/" element={<Dashboard />} />
             <Route path="/loginorreg" element={<Home />} />
             <Route path="/forgottenpassword" element={<ForgottenPassword />} />
             {/* <Route path="/admin" element={<Admin/>}/> */}
-            <Route path="/map" element={<Map/>}/>
-          
+            <Route path="/map" element={<Map />} />
+
             <Route path="emailsent">
               <Route path=":userEmail">
-                <Route path=":reset" element={<EmailSent/>}/>
+                <Route path=":reset" element={<EmailSent />} />
               </Route>
             </Route>
-            <Route path="/payment" element={<PaymentForm/>}/>
+
             <Route
-            path="/restaurantdetailpagedesktop"
-            element={<RestaurantDetailPageDesktopPage />}
-          />
-          <Route path="/macbookpro14one" element={<MacBookPro14OnePage />} />
-          <Route path="/orderingpage" element={<OrderingPagePage />} />
-            {/* <Route
-  path="/passwordreset/:userId?/:resetString?"
-  element={<PasswordReset />}
-/> */}
+              path="/restaurantdetailpagedesktop"
+              element={<RestaurantDetailPageDesktopPage />}
+            />
+            <Route path="/macbookpro14one" element={<MacBookPro14OnePage />} />
+            <Route path="/orderingpage" element={<OrderingPagePage />} />
+            <Route path="/payment" element={<PaymentModal />} />
+
             <Route path="passwordreset">
               <Route path=":userId">
-                <Route path=":resetString"  element={<PasswordReset/>}/>
+                <Route path=":resetString" element={<PasswordReset />} />
               </Route>
             </Route>
-
-
           </Routes>
         </StyledContainer>
       )}
