@@ -265,6 +265,7 @@ const sendVerificationEmail = ({ _id, email }, res) => {
         : process.env.REACT_APP_BASE_URL + '/';
 
     if (!currentUrl || !process.env.AUTH_EMAIL) {
+        console.error("Server configuration error: REACT_APP_BASE_URL or AUTH_EMAIL not set");
         return res.json({
             status: "FAILED",
             message: "Server configuration error!",
@@ -303,6 +304,7 @@ const sendVerificationEmail = ({ _id, email }, res) => {
                         .sendMail(mailOptions)
                         .then(() => {
                             // email sent and verification record saved
+                            console.log("Verification email sent to:", email);
                             res.json({
                                 status: "PENDING",
                                 message: "Verification email sent",
@@ -317,7 +319,8 @@ const sendVerificationEmail = ({ _id, email }, res) => {
                         });
                 })
                 .catch((error) => {
-                    console.error("Error saving verification record:", error);
+                    console.error("Error saving verification record:", error.message);
+                    console.error("Error details:", error);
                     res.json({
                         status: "FAILED",
                         message: "An error occurred while saving verification data!",
@@ -325,7 +328,8 @@ const sendVerificationEmail = ({ _id, email }, res) => {
                 });
         })
         .catch((error) => {
-            console.error("Error hashing unique string:", error);
+            console.error("Error hashing unique string:", error.message);
+            console.error("Error details:", error);
             res.json({
                 status: "FAILED",
                 message: "An error occurred while hashing email data!",
