@@ -1,10 +1,10 @@
 const express =require('express');
 const router=express.Router();
 const app=require('express')();
-app.use(express.static('public'));
+router.use(express.static('public'));
 //mongodb user model
 const User=require('./../models/User');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 //mongodb user verification model
 const UserVerification=require('./../models/UserVerification');
 const PasswordReset=require('./../models/PasswordReset');
@@ -49,6 +49,42 @@ const bcrypt = require('bcryptjs');
 const path=require("path");
 const { error } = require('console');
 const { errorMonitor } = require('events');
+const stripe = require('stripe')('sk_test_51OZRYhHXdyJ63GGlmb20Ku4ZBoj0juw0wmufE0BrzhqKbjflWgjaFKFQ0Jd8dKv6MJRxPuT4k6GbDTMS4QZNs6tM00KXUmVku1');
+
+const YOUR_DOMAIN = 'http://localhost:5000';
+
+router.post('/create-checkout-session', async (req, res) => {
+    console.log("Received request to create checkout session");
+
+    try {
+        // Log the request body
+        console.log("Request body:", req.body);
+
+        const session = await stripe.checkout.sessions.create({
+            line_items: [
+                {
+                    // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                    price: 'price_1P4MBaHXdyJ63GGlbvjv5Su1',
+                    quantity: 1,
+                },
+            ],
+            mode: 'payment',
+            success_url: `${YOUR_DOMAIN}?success=true`,
+            cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+        });
+
+        // Log the created session
+        console.log("Checkout session created:", session);
+
+        res.redirect(303, session.url);
+    } catch (error) {
+        // Log the error
+        console.error("Error creating checkout session:", error);
+
+        res.status(500).json({ error: 'Failed to create checkout session' });
+    }
+});
+
 
 router.post('/save-order', async (req, res) => {
     try {
