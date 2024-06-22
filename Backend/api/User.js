@@ -258,63 +258,81 @@ router.post('/signup',(req,res)=>{
     }
 
 })
-//send verification email
-const sendVerificationEmail =({_id,email},res)=>{
-    //url to be used in the email
-    const currentUrl = process.env.REACT_APP_BASE_URL;
+const sendVerificationEmail = ({ _id, email }, res) => {
+    // Ensure the URL ends with a slash if it doesn't already
+    const currentUrl = process.env.REACT_APP_BASE_URL.endsWith('/')
+        ? process.env.REACT_APP_BASE_URL
+        : process.env.REACT_APP_BASE_URL + '/';
 
-    const uniqueString=uuidv4() + _id;
-
-    //mail options
-    const mailOptions={
-        from:process.env.AUTH_EMAIL,
-        to:email,
-        subject:"Verify Your Email",
-        html:`<p>Verify your email address to complete the signup and login into your account</p><p>This link
-        <b>expires in 6 hours</b>.</p><p>Press <a href=${currentUrl + "user/verify/" + _id +"/"+uniqueString}>here</a>to proceed.</p>`,
+    if (!currentUrl || !process.env.AUTH_EMAIL) {
+        return res.json({
+            status: "FAILED",
+            message: "Server configuration error!",
+        });
     }
 
-    //hash the uniqueString
-    const saltRounds=10;
+    const uniqueString = uuidv4() + _id;
+
+    // mail options
+    const mailOptions = {
+        from: process.env.AUTH_EMAIL,
+        to: email,
+        subject: "Verify Your Email",
+        html: `<p>Verify your email address to complete the signup and login into your account</p>
+               <p>This link <b>expires in 6 hours</b>.</p>
+               <p>Press <a href="${currentUrl}user/verify/${_id}/${uniqueString}">here</a> to proceed.</p>`,
+    };
+
+    // hash the uniqueString
+    const saltRounds = 10;
     bcrypt
-        .hash(uniqueString,saltRounds)
-        .then((hashedUniqueString)=>{
-            //set values in userVerification collection
-            const newVerification=new UserVerification({
-                userId:_id,
-                uniqueString:hashedUniqueString,
-                createdAt:Date.now(),
-                expiresAt:Date.now()+21600000,
-            })
+        .hash(uniqueString, saltRounds)
+        .then((hashedUniqueString) => {
+            // set values in userVerification collection
+            const newVerification = new UserVerification({
+                userId: _id,
+                uniqueString: hashedUniqueString,
+                createdAt: Date.now(),
+                expiresAt: Date.now() + 21600000, // 6 hours
+            });
 
             newVerification
                 .save()
-                .then(()=>{
+                .then(() => {
                     transporter
                         .sendMail(mailOptions)
-                        .then(()=>{
-                            //email sent and verification recors saved
+                        .then(() => {
+                            // email sent and verification record saved
                             res.json({
-                                status:"PENDING",
-                                message:"Verification email sent"
-                            })
+                                status: "PENDING",
+                                message: "Verification email sent",
+                            });
                         })
+                        .catch((error) => {
+                            console.error("Error sending email:", error);
+                            res.json({
+                                status: "FAILED",
+                                message: "Failed to send verification email!",
+                            });
+                        });
                 })
-                .catch((error)=>{
-                    console.log(error);
+                .catch((error) => {
+                    console.error("Error saving verification record:", error);
                     res.json({
-                        status:"FAILED",
-                        message:"An error occured while hashing email data!",
-                    })
-                })
+                        status: "FAILED",
+                        message: "An error occurred while saving verification data!",
+                    });
+                });
         })
-        .catch(()=>{
+        .catch((error) => {
+            console.error("Error hashing unique string:", error);
             res.json({
-                status:"FAILED",
-                message:"An error occured while hashing email data!",
-            })
-        })
-}
+                status: "FAILED",
+                message: "An error occurred while hashing email data!",
+            });
+        });
+};
+
 
 //verify email
 router.get("/verify/:userId/:uniqueString",(req,res)=>{
