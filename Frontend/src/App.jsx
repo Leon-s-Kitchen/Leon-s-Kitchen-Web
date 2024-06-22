@@ -47,7 +47,6 @@ import MacBookPro14OnePage from "pages/MacBookPro14One";
 import PaymentForm from "pages/PaymentForm/PaymentForm";
 import Map from "pages/Map";
 import Gallery from "pages/Gallery/gallery";
-import ProductDisplay from "pages/ProductDisplay/ProductDisplay"
 function App({ checked }) {
   return (
     <BrowserRouter>
@@ -75,7 +74,6 @@ function App({ checked }) {
           />
           <Route path="/macbookpro14one" element={<MacBookPro14OnePage />} />
           <Route path="/orderingpage" element={<OrderingPagePage />} />
-          <Route path="/productdisplay" element={<ProductDisplay/>}/>
             {/* <Route
   path="/passwordreset/:userId?/:resetString?"
   element={<PasswordReset />}

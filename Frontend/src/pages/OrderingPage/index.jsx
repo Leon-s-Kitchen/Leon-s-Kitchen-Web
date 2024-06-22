@@ -13,7 +13,7 @@ import ReactWhatsapp from "react-whatsapp";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { BsEmojiSmile } from "react-icons/bs";
 import PopUpImage from "./../../assets/images/logo.png";
-import axios from "axios";
+
 
 
 const OrderingPagePage = ({ logoutUser, user }) => {
@@ -24,18 +24,6 @@ const OrderingPagePage = ({ logoutUser, user }) => {
   const [loading, setLoading] = useState(false);
   const [wmessage, setWMessage] = useState("");
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-
-
-  const onHandleCheckout = () => {
-    try {
-      axios
-        .post("http://localhost:5000/create-checkout-session")
-        .then(() => console.log("Success"));
-    } catch (ex) {
-      console.log("❌ Error occurred!: ", ex);
-    }
-  };
-
 
   const handleShowPopup = () => {
     setIsPopupVisible(true);
@@ -595,10 +583,9 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                         </div>
                         <Line className="bg-black-900_33 h-px w-full" />
 
-                        
+                        <form onSubmit={handleSubmit}>
                           <button
                             className="bg-orange-600_cc border border-black-900_1c border-solid flex flex-row items-center justify-between p-4 rounded-lg cursor-pointer w-100"
-                            onClick={() => navigate("/productdisplay")}
                             type="submit"
                             disabled={loading}
                             style={{
@@ -630,7 +617,7 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                               }, 0) + 200}
                             </span>
                           </button>
-                      
+                        </form>
                         <div className="flex flex-col items-center justify-start mt-0.5 mb-3 w-full">
                           {/* Button to select location */}
                           <Button
@@ -649,7 +636,102 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                               }}
                             />
                           </Button>
-                          
+                          <button
+                            className="bg-orange-600_cc border border-black-1900_1c border-solid flex flex-row items-center justify-between p-4 rounded-lg cursor-pointer"
+                            onClick={handleShowPopup}
+                          >
+                            <span className="ml-[26px] text-white-A700 text-xl">
+                              Place Order
+                            </span>
+                          </button>
+
+                          {isPopupVisible && (
+                            <div className="popup">
+                              <div className="popup-inner">
+                                <h2
+                                  style={{
+                                    fontWeight: "600",
+                                    textAlign: "center",
+                                    fontSize: "40px",
+                                  }}
+                                >
+                                  Order Information
+                                </h2>
+                                <p
+                                  style={{
+                                    textAlign: "center",
+                                    fontSize: "20px",
+                                  }}
+                                >
+                                  Your order is almost set!
+                                  <span
+                                    style={{
+                                      display: "inline-flex",
+                                      alignItems: "center",
+                                      marginLeft: "10px",
+                                      marginTop: "",
+                                    }}
+                                  >
+                                    <BsEmojiSmile />
+                                  </span>
+                                </p>
+
+                                <ul
+                                  style={{
+                                    listStyleType: "disc",
+                                    paddingLeft: "20px",
+                                  }}
+                                >
+                                  <li>
+                                    Please check the message details and send it
+                                    through WhatsApp.
+                                  </li>
+                                  <li>
+                                    WhatsApp will automatically open and send
+                                    the message.
+                                  </li>
+                                  <li>Please follow the steps.</li>
+                                </ul>
+                                <div className="flex justify-center mt-3">
+                                  <ReactWhatsapp
+                                    number="+94 0741112634"
+                                    className="bg-orange-600_cc border border-black-1900_1c border-solid flex items-center justify-center p-4 rounded-lg cursor-pointer"
+                                    message={wmessage}
+                                    onClick={handleSendMessage} // Call handleSendMessage when button is clicked
+                                  >
+                                    <FontAwesomeIcon
+                                      icon={faWhatsapp}
+                                      style={{
+                                        fontSize: "24px", // Match the font size of the text
+                                        color: "black",
+                                        marginRight: "10px", // Optional: Add some spacing between the icon and the text
+                                      }}
+                                    />
+                                    <span style={{ fontSize: "24px" }}>
+                                      Place Order
+                                    </span>
+                                  </ReactWhatsapp>
+                                </div>
+                                <img
+                                  src={PopUpImage}
+                                  alt="Popup"
+                                  style={{
+                                    width: "180px",
+                                    height: "180px",
+                                    marginLeft: "170px",
+                                  }}
+                                />
+                                <div className="button-wrapper">
+                                  <button
+                                    onClick={handleClosePopup}
+                                    className="popup-inner-button"
+                                  >
+                                    Close
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
