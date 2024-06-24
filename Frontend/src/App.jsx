@@ -44,6 +44,7 @@ import RestaurantDetailPageDesktopPage from "pages/RestaurantDetailPageDesktop";
 import OrderingPagePage from "pages/OrderingPage";
 import HomeDesktopLighterVersion from "pages/HomeDesktopLighterVersion";
 import MacBookPro14OnePage from "pages/MacBookPro14One";
+import TrackOrder from "pages/TrackOrder/TrackOrder";
 
 import Map from "pages/Map";
 import Gallery from "pages/Gallery/gallery";
@@ -62,7 +63,7 @@ function App({ checked }) {
             <Route path="/forgottenpassword" element={<ForgottenPassword />} />
             {/* <Route path="/admin" element={<Admin/>}/> */}
             <Route path="/map" element={<Map />} />
-
+            <Route path="/track" element={<TrackOrder/>}/>
             <Route path="emailsent">
               <Route path=":userEmail">
                 <Route path=":reset" element={<EmailSent />} />

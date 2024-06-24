@@ -42,7 +42,7 @@ const NavBar = ({
           </button>
           <button
             className="nav-button"
-            onClick={handleButtonClick}
+            onClick={() => navigate("/track")}
           >
             Track Order
           </button>

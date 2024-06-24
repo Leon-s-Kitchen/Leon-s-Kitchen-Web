@@ -49,7 +49,7 @@ const OrderingPagePage = ({ logoutUser, user }) => {
             cancel_url: orderDetails.cancel_url,
             notify_url: "https://www.google.com/notify",
             order_id: orderDetails.order_id,
-            items: "Door bell wireless",
+            items: "Total Payment",
             amount: orderDetails.amount,
             currency: orderDetails.currency,
             hash: hash,
