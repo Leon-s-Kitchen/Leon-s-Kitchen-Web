@@ -16,6 +16,8 @@ const Cart=require('./../models/Cart')
 const Destination = require('./../models/Destination');
 const Order=require('./../models/Order')
 const Product=require('./../models/Product')
+const AcceptedOrder=require('./../models/AcceptedOrder')
+const OutOfDeliveries =require('./../models/OutOfDelivery')
 require('dotenv').config();
 
 
@@ -65,6 +67,53 @@ const bcrypt = require('bcryptjs');
 const path=require("path");
 const { error } = require('console');
 const { errorMonitor } = require('events');
+
+
+router.get('/outofdelivery/:name', async (req, res) => {
+    const { name } = req.params;
+    console.log(`Checking out of delivery order for user: ${name}`); // Debug log
+  
+    try {
+      const order = await OutOfDeliveries.findOne({ name });
+      if (order) {
+        console.log(`Out of delivery order found for user: ${name}`); // Debug log
+        res.status(200).json({ exists: true });
+      } else {
+        console.log(`No out of delivery order found for user: ${name}`); // Debug log
+        res.status(404).json({ exists: false });
+      }
+    } catch (error) {
+      console.error(`Error finding out of delivery order for user: ${name}`, error); // Debug log
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  
+
+router.get('/order/exists/:name', async (req, res) => {
+    const { name } = req.params;
+    console.log(`Checking order for user: ${name}`); // Debug log
+  
+    try {
+      const order = await AcceptedOrder.findOne({ name });
+      if (order) {
+        console.log(`Order found for user: ${name}`); // Debug log
+        res.status(200).json({ exists: true });
+      } else {
+        console.log(`No order found for user: ${name}`); // Debug log
+        res.status(404).json({ exists: false });
+      }
+    } catch (error) {
+      console.error(`Error finding order for user: ${name}`, error); // Debug log
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+
+
+
+
+
+
+
 
 
 router.post('/create-checkout-session', (req, res) => {

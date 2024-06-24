@@ -1,31 +1,66 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import Alert from '@mui/material/Alert';
+import axios from 'axios';
+import { connect } from 'react-redux';
 
-const TrackOrder = () => {
+const TrackOrder = ({ user }) => {
+  const [orderExists, setOrderExists] = useState(false);
+  const [outOfDeliveryExists, setOutOfDeliveryExists] = useState(false);
+
+  useEffect(() => {
+    const checkOrderExists = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/order/exists/${user.name}`);
+        console.log(`Accepted order API response:`, response.data); // Debug log
+        setOrderExists(response.data.exists);
+      } catch (error) {
+        console.error('Error checking order existence', error);
+      }
+    };
+
+    checkOrderExists();
+  }, [user.name]);
+
+  useEffect(() => {
+    const checkOutOfDeliveryExists = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/outofdelivery/${user.name}`);
+        console.log(`Out of delivery order API response:`, response.data); // Debug log
+        setOutOfDeliveryExists(response.data.exists);
+      } catch (error) {
+        console.error('Error checking out of delivery order existence', error);
+      }
+    };
+
+    checkOutOfDeliveryExists();
+  }, [user.name]);
+
   return (
     <div>
-      <div>
-         Track Your Order
-      </div>
       <div style={{
-        marginTop:"10px",marginBottom:"10px"
-      }}>
-      <Alert variant="filled" severity="success">Your order has been accepted!</Alert>
+        fontSize:"120px",
+        marginTop:"-200px"
+      }}>Track Your Order</div>
+      <div style={{ marginTop: "60px", marginBottom: "10px" }}>
+        {orderExists ? (
+          <Alert variant="filled" severity="success">Your order has been accepted!</Alert>
+        ) : (
+          <Alert variant="filled" severity="info">No current order found</Alert>
+        )}
       </div>
-      <div style={{
-        marginBottom:"10px"
-      }}>
-      <Alert variant="filled" severity="success">Your order is out of delievery!</Alert>
+      <div style={{ marginTop: "20px", marginBottom: "10px" }}>
+        {outOfDeliveryExists ? (
+          <Alert variant="filled" severity="info">Your order is out for delivery!</Alert>
+        ) : (
+          <Alert variant="filled" severity="info">No order is out for delivery</Alert>
+        )}
       </div>
-      <div style={{
-        marginBottom:"10px"
-      }}>
-      <Alert variant="filled" severity="success">Your order marked as completed!</Alert>
-      </div>
-      
-
     </div>
-  )
-}
+  );
+};
 
-export default TrackOrder
+const mapStateToProps = ({ session }) => ({
+  user: session.user,
+});
+
+export default connect(mapStateToProps)(TrackOrder);
