@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Alert from '@mui/material/Alert';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import NavBar from './NavBar';
+import Rocket from './../../assets/images/rocket.gif'
 
 const TrackOrder = ({ user }) => {
   const [orderExists, setOrderExists] = useState(false);
@@ -37,10 +39,16 @@ const TrackOrder = ({ user }) => {
 
   return (
     <div>
+      <NavBar/>
       <div style={{
-        fontSize:"120px",
-        marginTop:"-200px"
-      }}>Track Your Order</div>
+        marginTop:"50px",
+        fontSize:"50px",
+        display:"flex",
+        justifyContent:"center",
+      }}>Track Your Order <img src={Rocket} style={{
+        width:"80px"
+      }}/></div>
+      
       <div style={{ marginTop: "60px", marginBottom: "10px" }}>
         {orderExists ? (
           <Alert variant="filled" severity="success">Your order has been accepted!</Alert>
