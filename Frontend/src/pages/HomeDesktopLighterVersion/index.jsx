@@ -187,7 +187,9 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
                 </Text>
                 <div className="h-[61px] relative w-[35%] md:w-full">
                   <div className="absolute bottom-[26%] inset-x-[0] mx-auto">
-                    <button className="text-black-900 font-poppins text-lg font-semibold mr-4 focus:outline-none hover:text-yellow-400 transition duration-300 ease-in-out">
+                    <button className="text-black-900 font-poppins text-lg font-semibold mr-4 focus:outline-none hover:text-yellow-400 transition duration-300 ease-in-out"
+                      onClick={"/loginorreg"}
+                    >
                       Pasta
                     </button>
                     <button className="text-black-900 font-poppins text-lg font-semibold mr-4 focus:outline-none hover:text-yellow-400 transition duration-300 ease-in-out">
@@ -207,10 +209,7 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
                 orientation="horizontal"
               >
                 <div className="h-[325px] relative w-full">
-                  <a
-                    href="#"
-                    className="block h-[325px] m-auto object-cover rounded-[12px] w-full overflow-hidden focus:outline-none"
-                  >
+                  
                     <Link
                       to="/loginorreg"
                       className="block h-[325px] m-auto rounded-[12px] w-full overflow-hidden focus:outline-none"
@@ -221,7 +220,7 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
                         alt="rectangleNine"
                       />
                     </Link>
-                  </a>
+           
                   <div className="absolute bottom-[11%] flex flex-col items-center justify-start left-[9%]">
                     <Text
                       className="text-2xl md:text-[22px] text-white-A700 sm:text-xl"
@@ -240,21 +239,15 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
 
                 <div className="flex flex-1 flex-col items-center justify-start w-full">
                   <div className="h-[325px] relative w-full">
-                    <a
-                      href="#"
-                      className="block h-[325px] m-auto rounded-[12px] w-full overflow-hidden focus:outline-none"
-                    >
+                    
                       <img
                         className="h-[325px] m-auto object-cover w-full transition-transform duration-300 transform hover:scale-105 focus:scale-105"
                         src="images/img_rectangle8_325x496.png"
                         alt="rectangleEight"
                       />
-                    </a>
+            
                     <div className="absolute h-[325px] inset-0 justify-center m-auto w-full">
-                      <a
-                        href="#"
-                        className="block h-[325px] m-auto rounded-[12px] w-full overflow-hidden focus:outline-none"
-                      >
+                     
                         <Link
                           to="/loginorreg"
                           className="block h-[325px] m-auto rounded-[12px] w-full overflow-hidden focus:outline-none"
@@ -265,7 +258,7 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
                             alt="rectangleNine"
                           />
                         </Link>
-                      </a>
+                  
                       <div className="absolute bottom-[11%] flex flex-col items-center justify-start left-[9%]">
                         <Text
                           className="text-2xl md:text-[22px] text-white-A700 sm:text-xl"
@@ -286,10 +279,7 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
 
                 <div className="flex flex-1 flex-col items-center justify-start w-full">
                   <div className="h-[325px] relative w-full">
-                    <a
-                      href="#"
-                      className="block h-[325px] m-auto object-cover rounded-[12px] w-full overflow-hidden focus:outline-none"
-                    >
+                   
                       <Link
                         to="/loginorreg"
                         className="block h-[325px] m-auto rounded-[12px] w-full overflow-hidden focus:outline-none"
@@ -300,21 +290,8 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
                           alt="rectangleNine"
                         />
                       </Link>
-                    </a>
-                    <div className="absolute bottom-[11%] flex flex-col items-start justify-start left-[9%]">
-                      <Text
-                        className="text-lg text-orange-600"
-                        size="txtPoppinsMedium18Orange600"
-                      >
-                        Restaurant
-                      </Text>
-                      <Text
-                        className="text-2xl md:text-[22px] text-white-A700 sm:text-xl"
-                        size="txtPoppinsBold24"
-                      >
-                        Pasta
-                      </Text>
-                    </div>
+               
+                   
                     <Button
                       className="absolute cursor-pointer font-bold leading-[normal] min-w-[88px] right-[4%] text-center text-lg top-[0]"
                       shape="round"
@@ -336,7 +313,7 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
               </Text>
               <div className="gap-5 grid sm:grid-cols-1 md:grid-cols-3 grid-cols-6 items-center justify-between w-full">
                 <a
-                  href="#"
+                  href="loginorreg"
                   className="block rounded-[12px] overflow-hidden focus:outline-none"
                 >
                   <Img
@@ -355,7 +332,7 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
                 </a>
 
                 <a
-                  href="#"
+                  href="loginorreg"
                   className=" bg-gray-100 border border-black-900_19 border-solid flex flex-col gap-2 justify-start pb-2 rounded-[12px] w-full overflow-hidden focus:outline-none"
                 >
                   <Img
@@ -374,7 +351,7 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
                 </a>
 
                 <a
-                  href="#"
+                  href="loginorreg"
                   className=" bg-gray-100 border border-black-900_19 border-solid flex flex-col gap-[9px] justify-start pb-2 rounded-[12px] w-full overflow-hidden focus:outline-none"
                 >
                   <Img
@@ -393,7 +370,7 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
                 </a>
 
                 <a
-                  href="#"
+                  href="loginorreg"
                   className="block bg-gray-100 border border-black-900_19 border-solid rounded-[12px] w-full focus:outline-none"
                 >
                   <Img
@@ -412,7 +389,7 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
                 </a>
 
                 <a
-                  href="#"
+                  href="loginorreg"
                   className="block bg-gray-100 border border-black-900_19 border-solid rounded-[12px] w-full focus:outline-none"
                 >
                   <Img
@@ -431,7 +408,7 @@ const HomeDesktopLighterVersionPage = ({ logoutUser, user }) => {
                 </a>
 
                 <a
-                  href="#"
+                  href="loginorreg"
                   className="block bg-gray-100 border border-black-900_19 border-solid rounded-[12px] w-full focus:outline-none"
                 >
                   <Img

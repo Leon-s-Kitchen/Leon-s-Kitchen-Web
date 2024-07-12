@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from "react";
+import PopUp from "./../../assets/images/notice.jpg";
 
 const AboutUsComponent = () => {
+  const [isPopupVisible, setIsPopupVisible] = useState(false); // State to control image popup visibility
+
+  const handleShowPopup = () => {
+    setIsPopupVisible(true); // Function to show the popup
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupVisible(false); // Function to hide the popup
+  };
+
   return (
     <div className="bg-blue_gray-100_75 flex flex-col items-center justify-center p-[108px] md:px-10 sm:px-5 rounded-[12px] w-[99%] md:w-full">
       <div className="flex flex-col md:gap-10 gap-[63px] items-center justify-start mb-[5px] mt-2 w-[99%] md:w-full">
@@ -14,25 +25,79 @@ const AboutUsComponent = () => {
             <div className="flex md:flex-col flex-row md:gap-5 items-start justify-end my-[11px] w-[96%] md:w-full">
               <div className="flex flex-col justify-start md:mt-0 mt-11 w-[31%] md:w-full">
                 <div className="bg-white flex flex-col items-end justify-start mr-4 p-2.5 rounded-[31px] hover:bg-orange-600 md:mr-0">
-                  <p className="my-[7px] text-black-900 text-lg tracking-[-0.36px] mr-10 font-bold">
+                  <p
+                    className="my-[7px] text-black-900 text-lg tracking-[-0.36px] mr-10 font-bold"
+                    onClick={handleShowPopup} // Attach onClick handler to show the popup
+                  >
                     How does Leon’s Kitchen work?
                   </p>
+
+                  {/* Conditional rendering for the image popup */}
+                  {isPopupVisible && (
+                    <div className="popup-overlay" onClick={handleClosePopup}>
+                      <div className="popup-content">
+                        <img
+                          src={PopUp} // Replace with the actual path to your image
+                          alt="Popup Image"
+                          className="popup-image"
+                          style={{
+                            width: "800px",
+                            height: "800px",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="bg-white flex flex-col items-end justify-start mr-6 p-2.5 rounded-[31px] hover:bg-orange-600 md:mr-0">
-                  <p className="ml-2.5 md:ml-[0] mt-2 text-black-900_01 text-lg tracking-[-0.36px] mr-4 font-bold">
+                  <p className="ml-2.5 md:ml-[0] mt-2 text-black-900_01 text-lg tracking-[-0.36px] mr-4 font-bold"
+                  onClick={handleShowPopup} 
+                  >
                     What payment methods are accepted?
                   </p>
+                  {isPopupVisible && (
+                    <div className="popup-overlay" onClick={handleClosePopup}>
+                      <div className="popup-content">
+                        <img
+                          src={PopUp} // Replace with the actual path to your image
+                          alt="Popup Image"
+                          className="popup-image"
+                          style={{
+                            width: "800px",
+                            height: "800px",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col gap-8 items-center justify-start ml-9 md:ml-[0] mt-[33px]">
                   <div className="bg-white flex flex-col items-end justify-start mr-4 p-2.5 rounded-[31px] hover:bg-orange-600 md:mr-0">
-                    <p className="text-black-900_01 text-lg tracking-[-0.36px] font-bold">
+                    <p className="text-black-900_01 text-lg tracking-[-0.36px] font-bold"
+                    onClick={handleShowPopup}>
                       Can I track my order in real-time?
                     </p>
                   </div>
                   <div className="bg-white flex flex-col items-end justify-start mr-4 p-2.5 rounded-[31px] hover:bg-orange-600 md:mr-0">
-                    <p className="text-black-900_01 text-center text-lg tracking-[-0.36px] font-bold">
+                    <p className="text-black-900_01 text-center text-lg tracking-[-0.36px] font-bold"
+                    onClick={handleShowPopup}>
                       Is delivery available in my area?
                     </p>
+                    {isPopupVisible && (
+                    <div className="popup-overlay" onClick={handleClosePopup}>
+                      <div className="popup-content">
+                        <img
+                          src={PopUp} // Replace with the actual path to your image
+                          alt="Popup Image"
+                          className="popup-image"
+                          style={{
+                            width: "800px",
+                            height: "800px",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
                   </div>
                 </div>
               </div>
@@ -81,7 +146,7 @@ const AboutUsComponent = () => {
                       className="h-[150px] md:h-auto mt-[18px] object-cover w-[115px]"
                       src="images/img_order1.png"
                       alt="orderOne"
-                      style={{ height: '130px' }}
+                      style={{ height: "130px" }}
                     />
                     <p className="mt-[5px] mx-auto text-base text-black-900 text-center tracking-[-0.32px] font-medium">
                       <>
@@ -93,9 +158,10 @@ const AboutUsComponent = () => {
                   </div>
                 </div>
                 <p className="text-base text-black-900_01 text-center tracking-[-0.32px] w-[83%] sm:w-full font-medium">
-                  leonskitchen.lk simplifies the food ordering process. Browse through our diverse menu, select
-                  your favorite dishes, and proceed to checkout. Your delicious meal will be on its way to your doorstep
-                  in no time!
+                  leonskitchen.lk simplifies the food ordering process. Browse
+                  through our diverse menu, select your favorite dishes, and
+                  proceed to checkout. Your delicious meal will be on its way to
+                  your doorstep in no time!
                 </p>
               </div>
             </div>

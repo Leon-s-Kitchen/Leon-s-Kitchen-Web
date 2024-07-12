@@ -15,6 +15,7 @@ import { BsEmojiSmile } from "react-icons/bs";
 import PopUpImage from "./../../assets/images/logo.png";
 import axios from "axios";
 
+
 const OrderingPagePage = ({ logoutUser, user }) => {
   const navigate = useNavigate();
   const [itemQuantities, setItemQuantities] = useState({});
@@ -25,27 +26,33 @@ const OrderingPagePage = ({ logoutUser, user }) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const handlePayment = async () => {
-    // Replace with actual values
+    const total = items.reduce((total, menuItem) => {
+      return (
+        total +
+        parseFloat(menuItem.price.replace("Rs. ", "")) *
+          (parseInt(itemQuantities[menuItem._id]) || 1)
+      );
+    }, 0) + 200;
+  
     const orderDetails = {
       order_id: "ItemNo12345",
-      amount: "1000.00",
+      amount: total.toFixed(2),
       currency: "LKR",
-      return_url: "https://www.google.com/",
+      return_url: "http://localhost:3000/map",
       cancel_url: "https://www.google.com/",
     };
-
+  
     try {
-      // Fetch hash and merchant_id from your backend
       const response = await axios.post(
         "http://localhost:5000/user/create-checkout-session",
         orderDetails
       );
       const { merchant_id, hash } = response.data;
-
+  
       const payment = {
         sandbox: true,
         merchant_id: merchant_id,
-        return_url: orderDetails.return_url,
+        return_url: "http://localhost:3000/map",
         cancel_url: orderDetails.cancel_url,
         notify_url: "https://www.google.com/notify",
         order_id: orderDetails.order_id,
@@ -55,16 +62,20 @@ const OrderingPagePage = ({ logoutUser, user }) => {
         hash: hash,
         first_name: "Saman",
         last_name: "Perera",
-        email: "samanp@gmail.com",
+        email: "amarasingheau@gmail.com",
         phone: "0771234567",
         address: "No.1, Galle Road",
         city: "Colombo",
         country: "Sri Lanka",
       };
-
-      // Ensure payhere object is available
+  
       if (window.payhere) {
-        window.payhere.startPayment(payment);
+        window.payhere.startPayment(payment, async (orderId) => {
+          // Payment successful callback
+          console.log("Payment successful. Order ID:", orderId);
+          // Navigate to the "/map" page after successful payment
+          navigate("/map");
+        });
       } else {
         console.error("PayHere SDK not loaded.");
       }
@@ -517,7 +528,7 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                             >
                               <FontAwesomeIcon icon={faTrash} />
                             </button>
-                            ;
+                            
                           </div>
                         ))}
                       </div>
@@ -686,102 +697,7 @@ const OrderingPagePage = ({ logoutUser, user }) => {
                               }}
                             />
                           </Button>
-                          <button
-                            className="bg-orange-600_cc border border-black-1900_1c border-solid flex flex-row items-center justify-between p-4 rounded-lg cursor-pointer"
-                            onClick={handleShowPopup}
-                          >
-                            <span className="ml-[26px] text-white-A700 text-xl">
-                              Place Order
-                            </span>
-                          </button>
-
-                          {isPopupVisible && (
-                            <div className="popup">
-                              <div className="popup-inner">
-                                <h2
-                                  style={{
-                                    fontWeight: "600",
-                                    textAlign: "center",
-                                    fontSize: "40px",
-                                  }}
-                                >
-                                  Order Information
-                                </h2>
-                                <p
-                                  style={{
-                                    textAlign: "center",
-                                    fontSize: "20px",
-                                  }}
-                                >
-                                  Your order is almost set!
-                                  <span
-                                    style={{
-                                      display: "inline-flex",
-                                      alignItems: "center",
-                                      marginLeft: "10px",
-                                      marginTop: "",
-                                    }}
-                                  >
-                                    <BsEmojiSmile />
-                                  </span>
-                                </p>
-
-                                <ul
-                                  style={{
-                                    listStyleType: "disc",
-                                    paddingLeft: "20px",
-                                  }}
-                                >
-                                  <li>
-                                    Please check the message details and send it
-                                    through WhatsApp.
-                                  </li>
-                                  <li>
-                                    WhatsApp will automatically open and send
-                                    the message.
-                                  </li>
-                                  <li>Please follow the steps.</li>
-                                </ul>
-                                <div className="flex justify-center mt-3">
-                                  <ReactWhatsapp
-                                    number="+94 0741112634"
-                                    className="bg-orange-600_cc border border-black-1900_1c border-solid flex items-center justify-center p-4 rounded-lg cursor-pointer"
-                                    message={wmessage}
-                                    onClick={handleSendMessage} // Call handleSendMessage when button is clicked
-                                  >
-                                    <FontAwesomeIcon
-                                      icon={faWhatsapp}
-                                      style={{
-                                        fontSize: "24px", // Match the font size of the text
-                                        color: "black",
-                                        marginRight: "10px", // Optional: Add some spacing between the icon and the text
-                                      }}
-                                    />
-                                    <span style={{ fontSize: "24px" }}>
-                                      Place Order
-                                    </span>
-                                  </ReactWhatsapp>
-                                </div>
-                                <img
-                                  src={PopUpImage}
-                                  alt="Popup"
-                                  style={{
-                                    width: "180px",
-                                    height: "180px",
-                                    marginLeft: "170px",
-                                  }}
-                                />
-                                <div className="button-wrapper">
-                                  <button
-                                    onClick={handleClosePopup}
-                                    className="popup-inner-button"
-                                  >
-                                    Close
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          )}
+                          
                         </div>
                       </div>
                     </div>

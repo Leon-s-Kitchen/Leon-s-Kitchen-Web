@@ -237,30 +237,30 @@
   
   @media (max-width: 480px) {
     .logo {
-      width: 30%; /* Adjust logo size further for smaller screens */
+      width: 30%; 
       top: 5px;
     }
   
     .nav-button {
-      font-size: 0.875rem; /* Adjust font size for smaller screens */
+      font-size: 0.875rem; 
     }
   
     .logout-button {
-      width: 80%; /* Adjust button width for smaller screens */
+      width: 80%; 
     }
   }
   @media (max-width: 800px) {
     .logo {
-      width: 30%; /* Adjust logo size further for smaller screens */
+      width: 30%; 
       top: 5px;
     }
   
     .nav-button {
-      font-size: 0.875rem; /* Adjust font size for smaller screens */
+      font-size: 0.875rem; 
     }
   
     .logout-button {
-      width: 80%; /* Adjust button width for smaller screens */
+      width: 80%; 
     }
   }
   
