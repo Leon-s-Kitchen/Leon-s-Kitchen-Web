@@ -101,7 +101,7 @@ import {
             New here? <TextLink to="/signup">Signup</TextLink>
           </ExtraText>
         </StyledFormArea>
-        <CopyrightText>All rights reserved &copy; 2024</CopyrightText>
+        <CopyrightText>All rights reserved & copy; 2024</CopyrightText>
       </div>
     );
   };

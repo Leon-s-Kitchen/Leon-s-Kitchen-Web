@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import PopUp from "./../../assets/images/notice.jpg";
 
 const AboutUsComponent = () => {
-  const [isPopupVisible, setIsPopupVisible] = useState(false); // State to control image popup visibility
+  const [isPopupVisible, setIsPopupVisible] = useState(false); 
 
   const handleShowPopup = () => {
-    setIsPopupVisible(true); // Function to show the popup
+    setIsPopupVisible(true); 
   };
 
   const handleClosePopup = () => {
-    setIsPopupVisible(false); // Function to hide the popup
+    setIsPopupVisible(false); 
   };
 
   return (
