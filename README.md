@@ -34,7 +34,7 @@ Leon's Kitchen is an online food ordering system for restaurants. This repositor
 
 ## Install Dependencies
 
-- npm install
+- npm install --force
 
 ## Set Up Environment Variables
 
